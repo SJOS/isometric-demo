@@ -1,19 +1,19 @@
 const GRID_SIZE = 10;
 
 let grid = [
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 1, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 1, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 1, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+  [14, 23, 23, 23, 23, 23, 23, 23, 23, 13],
+  [21, 32, 33, 33, 28, 33, 28, 33, 31, 20],
+  [21, 34,  0,  0, 25, 33, 30,  1, 34, 20],
+  [21, 34,  0,  0, 34,  1,  1, 10, 34, 20],
+  [21, 25, 33, 33, 24, 33, 33, 33, 27, 20],
+  [21, 34,  4,  7, 34, 18, 17, 10, 34, 20],
+  [21, 34,  4,  7, 34, 16, 19, 10, 34, 20],
+  [21, 34,  6,  8, 34, 10, 10, 10, 34, 20],
+  [21, 29, 33, 33, 26, 33, 33, 33, 30, 20],
+  [11, 22, 22, 22, 22, 22, 22, 22, 22, 12]
 ];
 
-
+const MAX_TILE_HEIGHT = 80;
 const TILE_WIDTH = 100;
 const TILE_HEIGHT = 50;
 
@@ -24,15 +24,19 @@ let y_start = 50;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tile_images.push(loadImage("./tiles/grass.png"));
-  tile_images.push(loadImage("./tiles/sand.png"));
-  tile_images.push(loadImage("./tiles/water.png"));
+  for (let i = 0; i <= 34; i++) {
+    tile_images.push(loadImage("./tiles/tile-" + i + ".png"));
+  }
 }
+
 
 function draw_tile(img, x, y) {
   let x_screen = x_start + (x - y) * TILE_WIDTH/2;
   let y_screen = y_start + (x + y) * TILE_HEIGHT/2;
-  image(img, x_screen, y_screen);
+
+  let z_offset = MAX_TILE_HEIGHT - img.height;
+  
+  image(img, x_screen, y_screen + z_offset);
 }
 
 
